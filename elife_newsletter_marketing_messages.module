@@ -6,7 +6,7 @@ function elife_newsletter_marketing_messages_menu() {
     'access callback' => TRUE,
   ];
 
-  $items['admin/newsletters/marketing-message'] = [
+  $items['civicrm/mailing/elife-marketing-messages'] = [
     'title' => 'Marketing messages for newsletters',
     'page callback' => 'drupal_get_form',
     'page arguments' => ['elife_newsletter_marketing_messages_form'],
