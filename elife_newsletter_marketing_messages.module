@@ -1,0 +1,50 @@
+<?php
+function elife_newsletter_marketing_json_menu() {
+
+  $items['newsletters/marketing-message'] = [
+    'page callback' => 'elife_newsletter_marketing_json_render',
+    'access callback' => TRUE,
+  ];
+
+  $items['admin/newsletters/marketing-message'] = [
+    'title' => 'Marketing messages for newsletters',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['elife_newsletter_marketing_json_form'],
+    'access callback' => 'TRUE',
+  ];
+
+  return $items;
+}
+
+function elife_newsletter_marketing_json_permission() {
+  return array(
+    'Edit marketing messages in elife newsletters' => array(
+      'title' => t('Edit marketing messages in elife newsletters'),
+    ),
+  );
+}
+
+
+function elife_newsletter_marketing_json_render($type) {
+  drupal_json_output(['html' => variable_get("elife_newsletter_marketing_json_{$type}_message")]);
+}
+
+function elife_newsletter_marketing_json_form($form) {
+
+  $form['elife_newsletter_marketing_json_vor_message'] = [
+      '#title' => 'VOR marketing message',
+      '#type' => 'textarea',
+      '#description' => 'Only include plain text with html &lt;a&gt; tags, e.g. \'Find out more about &lt;a href="https://elifesciences.org/about"&gt;eLife sciences&lt;/a&gt;\'.',
+      '#default_value' => variable_get('elife_newsletter_marketing_json_vor_message', 'Find out more about <a href="https://elifesciences.org/about">eLife sciences</a>')
+    ];
+  $form['elife_newsletter_marketing_json_poa_message'] = [
+      '#title' => 'POA marketing message',
+      '#type' => 'textarea',
+      '#description' => 'Only include plain text with html &lt;a&gt; tags, e.g. \'Find out more about &lt;a href="https://elifesciences.org/about"&gt;eLife sciences&lt;/a&gt;\'.',
+      '#default_value' => variable_get('elife_newsletter_marketing_json_poa_message', 'Find out more about <a href="https://elifesciences.org/about">eLife sciences</a>')
+
+  ];
+
+  return system_settings_form($form);
+
+}
