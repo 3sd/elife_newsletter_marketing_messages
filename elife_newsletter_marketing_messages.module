@@ -10,7 +10,7 @@ function elife_newsletter_marketing_messages_menu() {
     'title' => 'Marketing messages for newsletters',
     'page callback' => 'drupal_get_form',
     'page arguments' => ['elife_newsletter_marketing_messages_form'],
-    'access callback' => 'TRUE',
+    'access callback' => ['Edit marketing messages in elife newsletters'],
   ];
 
   return $items;
